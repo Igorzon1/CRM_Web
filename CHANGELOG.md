@@ -10,6 +10,11 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - Estrutura inicial de documentação Enterprise (ADRs, GitHub templates, Changelog).
 - Documentação de Produto (PRD, Requisitos e Histórias de Usuário).
 - Documentação de Design (UI/UX e ERD).
+- Entidade de Usuário (`User` e `UserRepository`).
+- Tratamento de Erros Global seguindo RFC 7807 (`GlobalExceptionHandler`).
+- Segurança via JWT e Spring Security 6 (`SecurityConfig`, `TokenService`, `SecurityFilter`).
+- Endpoints de autenticação (`/api/auth/register` e `/api/auth/login`).
+- Configuração de testes de integração com Testcontainers (`IntegrationTestBase`).
 
 ### Modificado
 - Definição da Stack Base: Java com Maven e React com JavaScript.

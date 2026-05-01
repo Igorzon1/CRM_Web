@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/crm_db
+    url: jdbc:postgresql://localhost:5433/crm_db
     username: crm_user
     password: crm_password
   jpa:

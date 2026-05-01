@@ -21,6 +21,10 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - **Frontend Core:** Roteamento com `react-router-dom` (`App.jsx`).
 - **Design System:** Estilos globais e tokens de CSS implementando Glassmorphism e fonte Inter no `index.css`.
 - **UI:** Tela Premium de Autenticação responsiva (`Login.jsx`) e *placeholder* de Dashboard.
+- **Integração Full-Stack (Sprint 5):** 
+  - Backend: Configuração de CORS para permitir React (`SecurityConfig`). Correção na tratativa de `UsernameNotFoundException` no `AuthorizationService`.
+  - Frontend: Context API para gerenciamento de sessão (`AuthContext.jsx`), Cliente Axios com injeção automática de Token JWT (`api.js`), Rotas Protegidas (`PrivateRoute`) e integração total do Login e Registro com o Spring Boot.
+  - UI: Adicionado botão de 'mostrar/ocultar' senha com ícones Lucide.
 
 ### Modificado
 - Definição da Stack Base: Java com Maven e React com JavaScript.

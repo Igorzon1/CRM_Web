@@ -18,6 +18,9 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - **Gestão de Clientes:** `Customer`, `CustomerType`, `CustomerRepository`.
 - **Regras de Clientes:** Validações de duplicação, DTOs (`CustomerRequest`, `CustomerResponse`), `CustomerService`.
 - **API Protegida:** `CustomerController` com suporte a listagem, filtro e criação de clientes.
+- **Frontend Core:** Roteamento com `react-router-dom` (`App.jsx`).
+- **Design System:** Estilos globais e tokens de CSS implementando Glassmorphism e fonte Inter no `index.css`.
+- **UI:** Tela Premium de Autenticação responsiva (`Login.jsx`) e *placeholder* de Dashboard.
 
 ### Modificado
 - Definição da Stack Base: Java com Maven e React com JavaScript.

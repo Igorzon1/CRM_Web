@@ -9,6 +9,7 @@
 - **RF04:** O sistema deve permitir o registro de notas e histórico de interações (ligações, reuniões, e-mails) na linha do tempo da Oportunidade ou Cliente.
 - **RF05:** O sistema deve possuir Autenticação Segura, garantindo que apenas usuários logados acessem a plataforma.
 - **RF06:** Ao concluir uma oportunidade com status "Ganho", o sistema deve disparar um evento assíncrono para enviar um e-mail de "Boas-vindas" ao cliente.
+- **RF07 (Isolamento de Dados):** O sistema deve implementar o conceito de Multi-tenancy, garantindo que os clientes e negócios sejam restritos apenas ao usuário autenticado que os criou, impedindo vazamento de dados entre contas. Além disso, é perfeitamente válido que duas contas (empresas) diferentes cadastrem o mesmo cliente (mesmo E-mail/CNPJ) em suas bases isoladas.
 
 ## Requisitos Não-Funcionais (RNF)
 *Como o sistema se comporta (Qualidade, Performance, Arquitetura).*

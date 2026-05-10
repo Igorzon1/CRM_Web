@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, User, Mail, Phone, FileText, Briefcase, ArrowRight, AlertCircle } from 'lucide-react';
 import { customerService } from '../services/customerService';
 
-export default function CustomerModal({ isOpen, onClose, onCustomerCreated }) {
+export default function CustomerModal({ isOpen, onClose, onCustomerCreated, customerToEdit }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,6 +10,22 @@ export default function CustomerModal({ isOpen, onClose, onCustomerCreated }) {
     document: '',
     type: 'PJ' // Default to PJ
   });
+
+  useEffect(() => {
+    if (customerToEdit) {
+      setFormData({
+        name: customerToEdit.name || '',
+        email: customerToEdit.email || '',
+        phone: customerToEdit.phone || '',
+        document: customerToEdit.document || '',
+        type: customerToEdit.type || 'PJ'
+      });
+    } else {
+      setFormData({ name: '', email: '', phone: '', document: '', type: 'PJ' });
+    }
+    setError('');
+  }, [customerToEdit, isOpen]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -26,9 +42,13 @@ export default function CustomerModal({ isOpen, onClose, onCustomerCreated }) {
     setLoading(true);
 
     try {
-      await customerService.createCustomer(formData);
+      if (customerToEdit) {
+        await customerService.updateCustomer(customerToEdit.id, formData);
+      } else {
+        await customerService.createCustomer(formData);
+      }
       onCustomerCreated();
-      onClose(); // Fechar o modal após criar
+      onClose(); // Fechar o modal após criar/editar
     } catch (err) {
       if (err.response && err.response.data) {
         const data = err.response.data;
@@ -54,7 +74,9 @@ export default function CustomerModal({ isOpen, onClose, onCustomerCreated }) {
       <div className="bg-white/80 backdrop-blur-xl border border-white/40 shadow-2xl rounded-2xl w-full max-w-lg relative z-10 animate-slide-up overflow-hidden">
         
         <div className="flex justify-between items-center p-6 border-b border-slate-200/60 bg-white/50">
-          <h2 className="text-xl font-bold text-slate-800">Novo Cliente</h2>
+          <h2 className="text-xl font-bold text-slate-800">
+            {customerToEdit ? 'Editar Cliente' : 'Novo Cliente'}
+          </h2>
           <button 
             onClick={onClose}
             className="text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-colors"
@@ -182,7 +204,7 @@ export default function CustomerModal({ isOpen, onClose, onCustomerCreated }) {
                 disabled={loading}
                 className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-all active:scale-95 disabled:opacity-70"
               >
-                {loading ? 'Salvando...' : 'Cadastrar Cliente'}
+                {loading ? 'Salvando...' : (customerToEdit ? 'Salvar Alterações' : 'Cadastrar Cliente')}
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
             </div>

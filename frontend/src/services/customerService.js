@@ -10,5 +10,14 @@ export const customerService = {
   createCustomer: async (customerData) => {
     const response = await api.post('/customers', customerData);
     return response.data;
+  },
+
+  updateCustomer: async (id, customerData) => {
+    const response = await api.put(`/customers/${id}`, customerData);
+    return response.data;
+  },
+
+  deleteCustomer: async (id) => {
+    await api.delete(`/customers/${id}`);
   }
 };

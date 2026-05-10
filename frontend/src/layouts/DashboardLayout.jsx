@@ -4,7 +4,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { LayoutDashboard, Users, Activity, LogOut, Settings, Bell, Search } from 'lucide-react';
 
 export default function DashboardLayout() {
-  const { signOut } = useContext(AuthContext);
+  const { signOut, user } = useContext(AuthContext);
   const location = useLocation();
 
   const navItems = [
@@ -91,8 +91,8 @@ export default function DashboardLayout() {
             <div className="flex items-center gap-3">
               <img className="w-10 h-10 rounded-full shadow-sm border-2 border-white" src="https://i.pravatar.cc/150?img=11" alt="Avatar User" />
               <div className="hidden md:block text-sm">
-                <p className="font-semibold text-slate-800 leading-none">Usuário VIP</p>
-                <p className="text-slate-500 text-xs mt-1">Vendedor Sênior</p>
+                <p className="font-semibold text-slate-800 leading-none">{user?.name || 'Carregando...'}</p>
+                <p className="text-slate-500 text-xs mt-1">{user?.email || 'Nível de Acesso: Padrão'}</p>
               </div>
             </div>
           </div>

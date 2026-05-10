@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Search, Building2, User, MoreVertical, RefreshCw, Users, Phone, Mail } from 'lucide-react';
+import { Plus, Search, Building2, User, MoreVertical, RefreshCw, Users, Phone, Mail, Edit2, Trash2 } from 'lucide-react';
 import { customerService } from '../services/customerService';
 import CustomerModal from '../components/CustomerModal';
 
@@ -8,6 +8,7 @@ export default function Customers() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [customerToEdit, setCustomerToEdit] = useState(null);
 
   const fetchCustomers = async (nameFilter = '') => {
     setLoading(true);
@@ -18,6 +19,27 @@ export default function Customers() {
       console.error("Failed to fetch customers", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleEdit = (customer) => {
+    setCustomerToEdit(customer);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setCustomerToEdit(null), 300);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Tem certeza que deseja excluir este cliente?')) {
+      try {
+        await customerService.deleteCustomer(id);
+        fetchCustomers(search);
+      } catch (err) {
+        alert('Erro ao excluir cliente.');
+      }
     }
   };
 
@@ -65,7 +87,7 @@ export default function Customers() {
           </button>
 
           <button 
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => { setCustomerToEdit(null); setIsModalOpen(true); }}
             className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-95"
           >
             <Plus className="w-4 h-4" />
@@ -132,9 +154,22 @@ export default function Customers() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <button className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
-                        <MoreVertical className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={() => handleEdit(customer)}
+                          className="p-2 text-blue-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          title="Editar"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                        <button 
+                          onClick={() => handleDelete(customer.id)}
+                          className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          title="Excluir"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -154,8 +189,9 @@ export default function Customers() {
 
       <CustomerModal 
         isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        onCustomerCreated={() => fetchCustomers(search)} 
+        onClose={handleCloseModal} 
+        onCustomerCreated={() => fetchCustomers(search)}
+        customerToEdit={customerToEdit}
       />
     </div>
   );

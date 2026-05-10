@@ -9,11 +9,15 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('@CRM:token');
+    const userStr = localStorage.getItem('@CRM:user');
     
     if (token) {
-      // In a real app we might validate the token or fetch user details here
       api.defaults.headers.authorization = `Bearer ${token}`;
-      setData({ token });
+      let user = null;
+      if (userStr) {
+        try { user = JSON.parse(userStr); } catch (e) {}
+      }
+      setData({ token, user });
     }
     
     setLoading(false);
@@ -22,12 +26,15 @@ export function AuthProvider({ children }) {
   async function signIn({ email, password }) {
     try {
       const response = await api.post('/auth/login', { email, password });
-      const { token } = response.data;
+      const { token, user } = response.data;
 
       localStorage.setItem('@CRM:token', token);
+      if (user) {
+        localStorage.setItem('@CRM:user', JSON.stringify(user));
+      }
       api.defaults.headers.authorization = `Bearer ${token}`;
 
-      setData({ token });
+      setData({ token, user });
     } catch (error) {
       if (error.response && error.response.data) {
         const data = error.response.data;
@@ -55,6 +62,7 @@ export function AuthProvider({ children }) {
 
   function signOut() {
     localStorage.removeItem('@CRM:token');
+    localStorage.removeItem('@CRM:user');
     setData({});
   }
 
@@ -63,6 +71,7 @@ export function AuthProvider({ children }) {
       signIn, 
       signUp,
       signOut, 
+      user: data.user,
       isAuthenticated: !!data.token,
       loading 
     }}>

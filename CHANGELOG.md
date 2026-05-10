@@ -25,6 +25,11 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
   - Backend: Configuração de CORS para permitir React (`SecurityConfig`). Correção na tratativa de `UsernameNotFoundException` no `AuthorizationService`.
   - Frontend: Context API para gerenciamento de sessão (`AuthContext.jsx`), Cliente Axios com injeção automática de Token JWT (`api.js`), Rotas Protegidas (`PrivateRoute`) e integração total do Login e Registro com o Spring Boot.
   - UI: Adicionado botão de 'mostrar/ocultar' senha com ícones Lucide.
+- **Dashboard e Gestão de Clientes (Sprint 6):**
+  - Layout Base: Criado o `DashboardLayout.jsx` com menu lateral persistente (SPA) e cabeçalho dinâmico.
+  - Clientes: Tela principal `Customers.jsx` com listagem de clientes e Empty State elegante.
+  - Modal: Componente `CustomerModal.jsx` para criação rápida de clientes (PJ/PF) direto da tela de listagem.
+  - Serviço de Integração: Configuração de requisições GET e POST no arquivo `customerService.js`.
 
 ### Modificado
 - Definição da Stack Base: Java com Maven e React com JavaScript.

@@ -1,35 +1,33 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-import { LogOut, LayoutDashboard } from 'lucide-react';
+import React from 'react';
 
 export default function Dashboard() {
-  const { signOut } = useContext(AuthContext);
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Topbar simples */}
-      <header className="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <LayoutDashboard className="w-6 h-6 text-blue-600" />
-          <h1 className="text-xl font-bold text-slate-800">Dashboard</h1>
-        </div>
-        
-        <button 
-          onClick={signOut}
-          className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-red-600 transition-colors"
-        >
-          <LogOut className="w-4 h-4" />
-          Sair do Sistema
-        </button>
-      </header>
+    <div className="animate-fade-in">
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Visão Geral</h1>
+        <p className="text-slate-500 text-sm mt-1">Bem-vindo ao CRM Enterprise. Aqui está o resumo das suas vendas.</p>
+      </div>
 
-      {/* Conteúdo */}
-      <main className="p-8">
-        <div className="glass-panel p-8 rounded-2xl animate-slide-up">
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">Parabéns! Você está logado.</h2>
-          <p className="text-slate-600">A integração do Frontend (React) com o Backend (Spring Boot JWT) foi um sucesso.</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="glass-panel p-6 rounded-2xl animate-slide-up">
+          <p className="text-sm font-semibold text-slate-500 uppercase">Clientes Totais</p>
+          <h2 className="text-4xl font-extrabold text-blue-600 mt-2">0</h2>
         </div>
-      </main>
+        <div className="glass-panel p-6 rounded-2xl animate-slide-up delay-100">
+          <p className="text-sm font-semibold text-slate-500 uppercase">Negócios em Andamento</p>
+          <h2 className="text-4xl font-extrabold text-emerald-600 mt-2">R$ 0,00</h2>
+        </div>
+        <div className="glass-panel p-6 rounded-2xl animate-slide-up delay-200">
+          <p className="text-sm font-semibold text-slate-500 uppercase">Taxa de Conversão</p>
+          <h2 className="text-4xl font-extrabold text-indigo-600 mt-2">0%</h2>
+        </div>
+      </div>
+
+      <div className="glass-panel p-8 rounded-2xl animate-slide-up delay-300 min-h-[300px] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-slate-400 font-medium">O gráfico de vendas será exibido aqui na próxima Sprint.</p>
+        </div>
+      </div>
     </div>
   );
 }

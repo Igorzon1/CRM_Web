@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Customers from './pages/Customers';
+import Deals from './pages/Deals';
 import DashboardLayout from './layouts/DashboardLayout';
 
 // Componente para rotas protegidas
@@ -37,6 +38,7 @@ function App() {
           >
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/customers" element={<Customers />} />
+            <Route path="/deals" element={<Deals />} />
           </Route>
           
           {/* Redirecionamento padrão */}

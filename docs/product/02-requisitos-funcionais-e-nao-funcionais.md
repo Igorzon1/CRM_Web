@@ -10,6 +10,7 @@
 - **RF05:** O sistema deve possuir Autenticação Segura, garantindo que apenas usuários logados acessem a plataforma.
 - **RF06:** Ao concluir uma oportunidade com status "Ganho", o sistema deve disparar um evento assíncrono para enviar um e-mail de "Boas-vindas" ao cliente.
 - **RF07 (Isolamento de Dados):** O sistema deve implementar o conceito de Multi-tenancy, garantindo que os clientes e negócios sejam restritos apenas ao usuário autenticado que os criou, impedindo vazamento de dados entre contas. Além disso, é perfeitamente válido que duas contas (empresas) diferentes cadastrem o mesmo cliente (mesmo E-mail/CNPJ) em suas bases isoladas.
+- **RF08:** Um cliente não pode estar em mais de um estágio ativo no Funil de Vendas ao mesmo tempo. Ou seja, não é permitido criar uma nova oportunidade para um cliente que já possui um negócio em andamento (qualquer estágio diferente de "Ganho" ou "Perdido").
 
 ## Requisitos Não-Funcionais (RNF)
 *Como o sistema se comporta (Qualidade, Performance, Arquitetura).*

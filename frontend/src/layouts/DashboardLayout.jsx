@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
-import { LayoutDashboard, Users, Activity, LogOut, Settings, Bell, Search } from 'lucide-react';
+import { LayoutDashboard, Users, Activity, LogOut, Settings, Bell, Search, Target } from 'lucide-react';
 
 export default function DashboardLayout() {
   const { signOut, user } = useContext(AuthContext);
@@ -10,6 +10,7 @@ export default function DashboardLayout() {
   const navItems = [
     { name: 'Visão Geral', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Meus Clientes', path: '/customers', icon: Users },
+    { name: 'Funil de Vendas', path: '/deals', icon: Target },
   ];
 
   const isActive = (path) => location.pathname === path;
